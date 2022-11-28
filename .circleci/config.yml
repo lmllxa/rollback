@@ -53,7 +53,7 @@ jobs:
           name: smoke test
           command: |
             fn() {
-            if curl -s --head http://google-121.com
+            if curl -s --head http://lmk1256d.com
             then {
                 echo "ok"
                 return 0

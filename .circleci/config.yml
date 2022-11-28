@@ -36,4 +36,19 @@ jobs:
       # Fail the job intentionally to simulate an error.
       # Uncomment the line below if you want to fail the current step
       # - run: return 1
+  # Exercise: Smoke Testing
+  smoke_test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run:
+          name: Test job
+          # Fail the job intentionally to simulate an error.
+          command:  return 1
       - destroy_environment
+  
+workflows:
+  myWorkflow:
+    jobs:
+      - create_infrastructure
+      - smoke_test

@@ -44,8 +44,19 @@ jobs:
       - run:
           name: smoke test
           command: |
-            chmod u+x test.sh
-            ./test.sh
+            fn() {
+            if curl -s --head http://google-121.com
+            then {
+                echo "ok"
+                return 0
+            }
+            else {
+                echo "no good"
+                return 1
+            }
+            fi
+            }
+            fn
       # Fail the job intentionally to simulate an error.
       # Uncomment the line below if you want to fail the current step
       # - run: return 1

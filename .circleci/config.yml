@@ -41,6 +41,17 @@ jobs:
               --template-file template.yml \
               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
               --region us-east-1
+            - run:
+          name: smoke test
+          command: |
+            URL="http://44.203.70.250:3000"
+            # Test if website works
+            if curl -s --head ${URL} 
+            then
+              return 0
+            else
+              return 1
+            fi
       # Fail the job intentionally to simulate an error.
       # Uncomment the line below if you want to fail the current step
       # - run: return 1
@@ -67,4 +78,4 @@ workflows:
   myWorkflow:
     jobs:
       - create_infrastructure
-      - smoke_test
+      #- smoke_test

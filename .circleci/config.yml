@@ -48,12 +48,20 @@ jobs:
   # Exercise: Smoke Testing
   smoke_test:
     docker:
-      - image: amazon/aws-cli
+      - image: alpine:latest
     steps:
+      - run: apk add --update curl
       - run:
-          name: Test job
-          # Fail the job intentionally to simulate an error.
-          command:  return 1
+          name: smoke test
+          command: |
+            URL="http://44.203.70.250:3000"
+            # Test if website works
+            if curl -s --head ${URL} 
+            then
+              return 0
+            else
+              return 1
+            fi
       - destroy_environment
 workflows:
   myWorkflow:

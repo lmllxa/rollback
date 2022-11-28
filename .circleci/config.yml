@@ -65,7 +65,7 @@ jobs:
             fi
             }
             fn
-    #  - destroy_environment
+      - destroy_environment
 workflows:
   myWorkflow:
     jobs:

@@ -52,3 +52,4 @@ workflows:
     jobs:
       - create_infrastructure
       - smoke_test
+      - destroy_environment

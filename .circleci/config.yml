@@ -8,6 +8,14 @@ version: 2.1
 # Orchestrate or schedule a set of jobs
 
 commands:
+  # Exercise: Reusable Job Code
+  print_pipeline_id:
+    parameters:
+      id: 
+        type: string
+    steps:
+      - run: echo << parameters.id >>
+
   # Exercise - Rollback
   destroy_environment:
     steps:
@@ -36,9 +44,19 @@ jobs:
       # Fail the job intentionally to simulate an error.
       # Uncomment the line below if you want to fail the current step
       # - run: return 1
+      #- destroy_environment
+  # Exercise: Smoke Testing
+  smoke_test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run:
+          name: Test job
+          # Fail the job intentionally to simulate an error.
+          command:  return 1
       - destroy_environment
 workflows:
   myWorkflow:
     jobs:
       - create_infrastructure
-      #- smoke_test
+      - smoke_test
